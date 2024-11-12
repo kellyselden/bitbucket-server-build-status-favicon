@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Bitbucket Server Build Status Favicon
 // @namespace   https://github.com/kellyselden
-// @version     2
+// @version     3
 // @description Monitor builds using tab icons
 // updateURL    https://raw.githubusercontent.com/kellyselden/bitbucket-server-build-status-favicon/main/meta.js
 // downloadURL  https://raw.githubusercontent.com/kellyselden/bitbucket-server-build-status-favicon/main/user.js

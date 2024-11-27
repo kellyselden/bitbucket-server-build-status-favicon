@@ -26,14 +26,6 @@ function getFavicon() {
   return document.head.querySelector('link[rel="shortcut icon"]');
 }
 
-let originalFavicon = getFavicon();
-
-function replaceFavicon(favicon = getFavicon()) {
-  if (favicon) {
-    document.head.replaceChild(originalFavicon, favicon);
-  }
-}
-
 function updateFavicon() {
   let favicon = getFavicon();
 
@@ -128,7 +120,7 @@ new MutationObserver(mutationsList => {
           statusIconClassObserver.disconnect();
           statusIconClassObserver = null;
 
-          replaceFavicon();
+          updateFavicon();
         }
       }
     }

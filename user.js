@@ -84,9 +84,9 @@ function updateFavicon(statusIcon) {
   favicon.href = `data:image/svg+xml,${svg.outerHTML}`;
 }
 
-let container = document.querySelector('.pull-request-tabs [role="tabpanel"]');
+let tabContainer = document.querySelector('.pull-request-tabs [role="tabpanel"]');
 
-let statusIcon = container.querySelector(statusIconClass);
+let statusIcon = tabContainer.querySelector(statusIconClass);
 
 updateFavicon(statusIcon);
 
@@ -148,7 +148,7 @@ new MutationObserver(mutationsList => {
       }
     }
   }
-}).observe(container, {
+}).observe(tabContainer, {
   childList: true,
   subtree: true,
 });

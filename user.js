@@ -20,6 +20,7 @@ const icons = {
 };
 
 const statusIconClass = '[data-testid="pull-request-builds-summary"] .build-status-icon';
+const vetoesCountClass = '.veto-count';
 
 function getFavicon() {
   return document.head.querySelector('link[rel="shortcut icon"]');
@@ -79,7 +80,18 @@ function updateFavicon() {
 
   icon.textContent = iconText;
 
+  let number = document.createElement('text');
+
+  number.setAttribute('x', '4.5');
+  number.setAttribute('y', '13');
+  number.setAttribute('font-size', '13');
+  number.setAttribute('font-family', 'Helvetica');
+  number.setAttribute('font-weight', 'bold');
+
+  number.textContent = vetoesCount.textContent;
+
   svg.appendChild(icon);
+  svg.appendChild(number);
 
   favicon.href = `data:image/svg+xml,${svg.outerHTML}`;
 }
@@ -87,6 +99,10 @@ function updateFavicon() {
 let tabContainer = document.querySelector('.pull-request-tabs [role="tabpanel"]');
 
 let statusIcon = tabContainer.querySelector(statusIconClass);
+
+let vetoesCountContainer = document.querySelector('.merge-button-container');
+
+let vetoesCount = vetoesCountContainer.querySelector(vetoesCountClass);
 
 updateFavicon();
 
@@ -155,6 +171,25 @@ new MutationObserver(mutationsList => {
     }
   }
 }).observe(tabContainer, {
+  childList: true,
+  subtree: true,
+});
+
+new MutationObserver(mutationsList => {
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      for (let node of mutation.addedNodes) {
+        let _vetoesCount = find(node, vetoesCountClass);
+
+        if (_vetoesCount) {
+          vetoesCount = _vetoesCount;
+
+          updateFavicon();
+        }
+      }
+    }
+  }
+}).observe(vetoesCountContainer, {
   childList: true,
   subtree: true,
 });

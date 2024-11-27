@@ -33,7 +33,7 @@ function replaceFavicon(favicon = getFavicon()) {
   }
 }
 
-function updateFavicon(statusIcon) {
+function updateFavicon() {
   let favicon = getFavicon();
 
   let iconText;
@@ -88,7 +88,7 @@ let tabContainer = document.querySelector('.pull-request-tabs [role="tabpanel"]'
 
 let statusIcon = tabContainer.querySelector(statusIconClass);
 
-updateFavicon(statusIcon);
+updateFavicon();
 
 function find(node, query) {
   if (node.matches?.(query)) {
@@ -104,9 +104,11 @@ new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type === 'childList') {
       for (let node of mutation.removedNodes) {
-        let statusIcon = find(node, statusIconClass);
+        let _statusIcon = find(node, statusIconClass);
 
-        if (statusIcon) {
+        if (_statusIcon) {
+          statusIcon = null;
+
           statusIconClassObserver.disconnect();
           statusIconClassObserver = null;
 
@@ -123,18 +125,22 @@ new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type === 'childList') {
       for (let node of mutation.addedNodes) {
-        let statusIcon = find(node, statusIconClass);
+        let _statusIcon = find(node, statusIconClass);
 
-        if (statusIcon) {
-          updateFavicon(statusIcon);
+        if (_statusIcon) {
+          statusIcon = _statusIcon;
+
+          updateFavicon();
 
           statusIconClassObserver = new MutationObserver(mutationsList => {
             for (let mutation of mutationsList) {
               if (mutation.type === 'childList') {
-                let statusIcon = find(node, statusIconClass);
+                let _statusIcon = find(node, statusIconClass);
 
-                if (statusIcon) {
-                  updateFavicon(statusIcon);
+                if (_statusIcon) {
+                  statusIcon = _statusIcon;
+
+                  updateFavicon();
                 }
               }
             }

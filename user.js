@@ -33,13 +33,13 @@ function replaceFavicon(favicon = getFavicon()) {
   }
 }
 
-function updateFavicon(status) {
+function updateFavicon(statusIcon) {
   let favicon = getFavicon();
 
   let iconText;
 
   for (let [_class, icon] of Object.entries(icons)) {
-    if (status.classList.contains(_class)) {
+    if (statusIcon.classList.contains(_class)) {
       iconText = icon;
 
       break;
@@ -82,10 +82,10 @@ function updateFavicon(status) {
 
 let container = document.querySelector('.pull-request-tabs [role="tabpanel"]');
 
-let status = container.querySelector(statusIconClass);
+let statusIcon = container.querySelector(statusIconClass);
 
-if (status) {
-  updateFavicon(status);
+if (statusIcon) {
+  updateFavicon(statusIcon);
 }
 
 function find(node, query) {
@@ -102,9 +102,9 @@ new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type === 'childList') {
       for (let node of mutation.removedNodes) {
-        let status = find(node, statusIconClass);
+        let statusIcon = find(node, statusIconClass);
 
-        if (status) {
+        if (statusIcon) {
           statusIconClassObserver.disconnect();
           statusIconClassObserver = null;
 
@@ -121,24 +121,24 @@ new MutationObserver(mutationsList => {
   for (let mutation of mutationsList) {
     if (mutation.type === 'childList') {
       for (let node of mutation.addedNodes) {
-        let status = find(node, statusIconClass);
+        let statusIcon = find(node, statusIconClass);
 
-        if (status) {
-          updateFavicon(status);
+        if (statusIcon) {
+          updateFavicon(statusIcon);
 
           statusIconClassObserver = new MutationObserver(mutationsList => {
             for (let mutation of mutationsList) {
               if (mutation.type === 'childList') {
-                let status = find(node, statusIconClass);
+                let statusIcon = find(node, statusIconClass);
 
-                if (status) {
-                  updateFavicon(status);
+                if (statusIcon) {
+                  updateFavicon(statusIcon);
                 }
               }
             }
           });
 
-          statusIconClassObserver.observe(status.closest('.summary-panel'), {
+          statusIconClassObserver.observe(statusIcon.closest('.summary-panel'), {
             subtree: true,
             childList: true,
           });

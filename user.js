@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name         Bitbucket Server Build Status Favicon
+// @name         Bitbucket Server Pull Request Favicon
 // @namespace    https://github.com/kellyselden
-// @version      8
+// @version      9
 // @description  Monitor builds using tab icons
-// @updateURL    https://raw.githubusercontent.com/kellyselden/bitbucket-server-build-status-favicon/main/meta.js
-// @downloadURL  https://raw.githubusercontent.com/kellyselden/bitbucket-server-build-status-favicon/main/user.js
+// @updateURL    https://raw.githubusercontent.com/kellyselden/bitbucket-server-pull-request-favicon/main/meta.js
+// @downloadURL  https://raw.githubusercontent.com/kellyselden/bitbucket-server-pull-request-favicon/main/user.js
 // @author       Kelly Selden
 // @license      MIT
-// @source       https://github.com/kellyselden/bitbucket-server-build-status-favicon
-// @supportURL   https://github.com/kellyselden/bitbucket-server-build-status-favicon/issues/new
+// @source       https://github.com/kellyselden/bitbucket-server-pull-request-favicon
+// @supportURL   https://github.com/kellyselden/bitbucket-server-pull-request-favicon/issues/new
 // @include      http*://*bitbucket*/projects/*/repos/*/pull-requests/*/*
 // ==/UserScript==
 'use strict';

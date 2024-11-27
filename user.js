@@ -38,16 +38,20 @@ function updateFavicon(statusIcon) {
 
   let iconText;
 
-  for (let [_class, icon] of Object.entries(icons)) {
-    if (statusIcon.classList.contains(_class)) {
-      iconText = icon;
+  if (statusIcon) {
+    for (let [_class, icon] of Object.entries(icons)) {
+      if (statusIcon.classList.contains(_class)) {
+        iconText = icon;
 
-      break;
+        break;
+      }
     }
-  }
 
-  if (!iconText) {
-    iconText = '❓';
+    if (!iconText) {
+      iconText = '❓';
+    }
+  } else {
+    iconText = '⚪️';
   }
 
   if (favicon) {
@@ -84,9 +88,7 @@ let container = document.querySelector('.pull-request-tabs [role="tabpanel"]');
 
 let statusIcon = container.querySelector(statusIconClass);
 
-if (statusIcon) {
-  updateFavicon(statusIcon);
-}
+updateFavicon(statusIcon);
 
 function find(node, query) {
   if (node.matches?.(query)) {
